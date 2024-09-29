@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import { login } from '../src/services/api'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import Link from 'next/link'
 
 export default function LoginForm() {
   const [username, setUsername] = useState('')
@@ -20,34 +23,24 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-md mx-auto text-white">
       <h2 className="text-2xl font-bold mb-5">Login</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4 text-black">
-          <label className="block text-gray-700">Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border rounded"
-          />
+        <div className="mb-4">
+          <label className="block">Username</label>
+          <Input type="text" placeholder="Username" value={username} onChange={setUsername} />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded"
-          />
+          <label className="block">Password</label>
+          <Input type="text" placeholder="Password" value={password} onChange={setPassword} />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Login
-        </button>
+        <Button className={'bg-neonPink w-full font-bold'}>Login</Button>
       </form>
+      <div className='mt-4'>
+        <Link href="/register">
+        <span>Nao possui uma conta? <span className='text-neonYellow hover:underline'>Crie uma</span></span>
+        </Link>
+      </div>
       {message && <p className="mt-4">{message}</p>}
     </div>
   )
