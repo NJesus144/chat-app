@@ -1,9 +1,9 @@
-import LoginForm from "../../../components/LoginForm";
+import LoginForm from "../../../components/LoginForm"
 
 
 export default function Login() {
   return (
-    <div>
+    <div className="bg-darkGray h-screen w-full pt-20">
       <LoginForm />
     </div>
   )
