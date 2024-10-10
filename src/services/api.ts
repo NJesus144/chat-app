@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3001/auth'
+const API_URL = 'http://localhost:4000/auth'
 
 interface UserData {
   username: string
@@ -25,6 +25,21 @@ export const login = async ({ username, password }: UserData) => {
       username,
       password,
     })
+    return response.data
+  } catch (error) {
+    throw new Error('An unexpected error occurred')
+  }
+}
+
+export const getProfile = async (token: string) => {
+
+  try {
+    const response = await axios.get(`${API_URL}/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    console.log(response)
     return response.data
   } catch (error) {
     throw new Error('An unexpected error occurred')
