@@ -5,8 +5,10 @@ import { register } from '../src/services/api'
 import { Button } from "@/components/ui/button"
 import { Input } from './ui/input'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function RegisterForm() {
+  const router = useRouter()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
@@ -16,6 +18,9 @@ export default function RegisterForm() {
     try {
       const data = await register({ username, password })
       setMessage('User registered successfully')
+      if (data) {
+        router.push("/login")
+      }
     } catch (error) {
       setMessage('An unexpected error occurred')
     }
@@ -37,7 +42,7 @@ export default function RegisterForm() {
       </form>
       <div className='mt-4'>
         <Link href="/login">
-        <span>Já possui conta? <span className='text-neonYellow hover:underline'>Faça login</span></span>
+          <span>Já possui conta? <span className='text-neonYellow hover:underline'>Faça login</span></span>
         </Link>
       </div>
       {message && <p className="mt-4">{message}</p>}

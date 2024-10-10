@@ -5,8 +5,10 @@ import { login } from '../src/services/api'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function LoginForm() {
+  const router = useRouter()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
@@ -17,6 +19,9 @@ export default function LoginForm() {
       const data = await login({ username, password })
       localStorage.setItem('token', data.access_token)
       setMessage('User logged in successfully')
+      if (data) {
+        router.push("/profile")
+      }
     } catch (error) {
       setMessage('An unexpected error occurred')
     }
